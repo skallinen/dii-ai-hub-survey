@@ -29,7 +29,7 @@ Triangle weights sum to about 100 and follow the corner order:
 - `decided`: our experience with AI, the problem itself, the conditions around us (time, tools, access)
 - `help`: learning (someone showing me how), doing (time to try it on real work), sharing (seeing what others did)
 
-## Firestore rule to add (once, by hand)
+## Firestore rule (published 7.10.2026)
 
 Firebase Console, project `book-club-e4916`, Firestore Database, Rules. Paste this block
 inside `match /databases/{database}/documents { ... }`, next to the August
@@ -62,5 +62,6 @@ gh repo create skallinen/dii-ai-hub-survey --public --source . --push
 gh api -X POST repos/skallinen/dii-ai-hub-survey/pages -f 'source[branch]=main' -f 'source[path]=/'
 ```
 
-Then add the Firestore rule above. Until the rule is published, Send fails with "Could
-not send". Send one test answer, then delete it in the Firebase Console.
+Live since 7.10.2026: Pages on, rule published through the Firebase Rules API (the rest of
+the rules document unchanged), one test answer sent through the live page, found in
+Firestore and deleted. A new rule can take a minute or two before writes pass.
