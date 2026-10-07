@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Before the AI workshop</title>
+<style>
+  :root{
+    --ink:#16181d; --ink2:#5b6169; --muted:#9aa0a8; --line:#e2e4e8;
+    --bg:#f6f5f2; --card:#ffffff; --accent:#3665d8; --accent2:#d8a13a;
+    --good:#1a9a4e; --dot:#d24b3e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.5;
+    -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:680px;margin:0 auto;padding:28px 20px 120px;}
+  h1{font-size:26px;font-weight:800;letter-spacing:-0.01em;margin:0 0 6px;}
+  .lede{color:var(--ink2);font-size:16px;margin:0 0 26px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px 18px;margin:0 0 16px;}
+  .q{font-weight:600;font-size:16px;margin:0 0 4px;}
+  .hint{color:var(--muted);font-size:13.5px;margin:0 0 12px;}
+  textarea,input[type=text]{width:100%;border:1px solid var(--line);border-radius:9px;
+    padding:11px;font:inherit;color:var(--ink);background:#fcfcfb;resize:vertical;}
+  textarea{min-height:84px;}
+  .opts label{display:block;border:1px solid var(--line);border-radius:9px;padding:10px 12px;
+    margin:6px 0;cursor:pointer;font-size:15px;}
+  .opts input{margin-right:9px;}
+  .opts label:hover{border-color:var(--accent);}
+  .triad{display:flex;flex-direction:column;align-items:center;}
+  .triad svg{touch-action:none;max-width:100%;height:auto;}
+  .corner{font-size:11px;fill:var(--ink2);font-weight:600;}
+  .tri-shape{fill:#faf9f7;stroke:var(--line);stroke-width:1.5;}
+  .placed{font-size:12.5px;color:var(--good);margin-top:6px;min-height:18px;}
+  .dyad-ends{display:flex;justify-content:space-between;font-size:13px;color:var(--ink2);
+    margin-bottom:2px;gap:10px;}
+  .dyad-ends span:last-child{text-align:right;}
+  input[type=range]{width:100%;}
+  .conf{display:flex;gap:8px;margin-top:6px;}
+  .conf label{flex:1;text-align:center;border:1px solid var(--line);border-radius:9px;
+    padding:9px 0;cursor:pointer;font-size:15px;}
+  .conf input{display:none;}
+  .conf input:checked + span{font-weight:700;color:var(--accent);}
+  #bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);
+    border-top:1px solid var(--line);padding:12px 20px;}
+  #bar .inner{max-width:680px;margin:0 auto;display:flex;align-items:center;gap:14px;}
+  button{background:var(--accent);color:#fff;border:0;border-radius:10px;
+    padding:12px 22px;font:inherit;font-weight:700;cursor:pointer;}
+  button[disabled]{background:#b9c2d8;cursor:not-allowed;}
+  #status{color:var(--ink2);font-size:14px;}
+  .done{text-align:center;padding:60px 20px;}
+  .done h2{font-size:22px;}
+  .sec{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);
+    margin:26px 4px 10px;font-weight:700;}
+  .req{color:var(--dot);}
+  /* The counterpart to .req, and it now appears exactly once, on the tips question.
+     Labelling half the survey optional taught people to skim past all of it, so the
+     word is reserved for the one question we genuinely expect to come back empty. */
+  .opt{color:var(--muted);font-weight:400;font-size:12px;letter-spacing:0.04em;
+    text-transform:uppercase;margin-left:6px;}
+</style>
+</head>
+<body>
+<div class="wrap" id="form">
+  <h1>Before the AI workshop</h1>
+  <p class="lede">Five minutes, before we meet. A few of these ask you to guess. Guess
+  anyway, do not look anything up. Half the value is what we do with your guesses in the
+  room. Your name is on your answers so we can see how the team's picture moves over time; answer straight.</p>
+  <p class="lede" style="font-size:15px;color:var(--ink2)">Six things are needed: your
+  name, one moment, the five triangles, the speed estimate and your confidence in it, and
+  how often you use AI.
+  <strong>The last question, about tips and sources, is optional</strong>. Leave it empty
+  if nothing comes to you quickly. It scrolls longer than it takes.</p>
+
+  <div class="sec">You</div>
+  <div class="card">
+    <div class="q">Your name <span class="req">*</span></div>
+    <div class="hint">So we can compare waves over time. This survey is attributed, not anonymous.</div>
+    <input type="text" id="name">
+  </div>
+
+  <div class="sec">One moment</div>
+  <div class="card">
+    <div class="q">Think of one specific, recent time you used AI in your actual work. <span class="req">*</span></div>
+    <div class="hint">Not "I use it a lot", one occasion. Two or three sentences: what were
+      you doing, and what happened? You will place this moment on the triangles below.</div>
+    <textarea id="story" maxlength="1200"></textarea>
+  </div>
+
+  <div class="sec">Place that moment</div>
+  <div class="card" style="background:#f0f4ff;border-color:#c9d6f5">
+    <div class="q">How the triangles work</div>
+    <p style="margin:0 0 8px;font-size:14.5px;color:#3a4048">You are not picking one corner.
+      You are weighing all three against each other and placing your dot where the balance
+      falls for your moment.</p>
+    <ul style="margin:0;padding-left:18px;font-size:14px;color:#3a4048">
+      <li>Near a corner: that one dominated.</li>
+      <li>On an edge between two: those two mattered, the third barely.</li>
+      <li>In the middle: all three pulled about equally.</li>
+    </ul>
+    <p style="margin:8px 0 0;font-size:14.5px;color:#3a4048">If a placement feels hard, that
+      is the point. The difficulty is you actually weighing the tradeoff, which is exactly
+      what we want to see. There is no right answer and no good corner; all three are real.</p>
+  </div>
+  <div id="triads"></div>
+
+  <div class="sec">Two sliders</div>
+  <div id="dyads"></div>
+
+  <div class="sec">One number</div>
+  <div class="card">
+    <div class="q">That moment, or your last AI-assisted task: roughly how much faster were
+      you than doing it alone? <span class="req">*</span></div>
+    <div class="opts" id="speed"></div>
+  </div>
+  <div class="card">
+    <div class="q">How confident are you in that estimate? <span class="req">*</span></div>
+    <div class="conf" id="conf"></div>
+  </div>
+
+  <div class="sec">Who is answering</div>
+  <div class="card">
+    <div class="q">Your work</div>
+    <div class="opts" id="role"></div>
+  </div>
+  <div class="card">
+    <div class="q">How often you use AI in real work <span class="req">*</span></div>
+    <div class="opts" id="freq"></div>
+  </div>
+
+  <div class="sec">One open question, optional</div>
+  <div class="card">
+    <div class="q">Anything good on this you would pass on?<span class="opt">optional</span></div>
+    <div class="hint">Whatever you rate, in any language: people, blogs, newsletters,
+      talks, papers, podcasts. Links welcome, names are fine. Leave it empty if nothing
+      comes to mind. We will share the collected list back to everyone.</div>
+    <textarea id="sources"></textarea>
+  </div>
+</div>
+
+<div class="done" id="thanks" style="display:none">
+  <h2>Thank you.</h2>
+  <p class="lede">That is exactly what we needed. See you at the workshop.</p>
+</div>
+
+<div id="bar"><div class="inner">
+  <button id="submit" disabled>Send</button>
+  <span id="status">Your name, one moment, five triangles, one number with your confidence in it, and one habit to send.</span>
+</div></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
+// ---- CONFIG -----------------------------------------------------------------
+// Reuses the existing Firebase project (book-club-e4916). Responses go to a NEW,
+// isolated collection so nothing touches book-club data. This apiKey is a client
+// identifier, not a secret; security is enforced by Firestore rules (create-only on
+// this one collection). See the rules block Sami must publish once.
+const firebaseConfig = {
+  apiKey: "AIzaSyCUn2U-L_gipdKcpcXe4r1TCM63dxhDVnM",
+  authDomain: "book-club-e4916.firebaseapp.com",
+  projectId: "book-club-e4916",
+  storageBucket: "book-club-e4916.firebasestorage.app",
+  messagingSenderId: "910679044088",
+  appId: "1:910679044088:web:04f7c993a52c7f393af00d"
+};
+const COLLECTION = "dii_survey_2026";
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+// -----------------------------------------------------------------------------
+
+const TRIADS = [
+  {id:"a", q:"In that moment, AI mostly", corners:["saved me time","raised the quality","showed me something new"]},
+  {id:"b", q:"What made it work, or would have", corners:["my skill with it","the time I had","my willingness to change"]},
+  {id:"c", q:"In my work, the hard part is", corners:["deciding what is worth doing","making the thing","knowing it is any good"]},
+  {id:"d", q:"Right now, AI feels like", corners:["a tool I drive","something I hand work to","something coming for my job"]},
+  {id:"e", q:"When AI gives me something in my own area", corners:["I check it properly","I trust my gut","if it looks right, it goes"]},
+];
+const DYADS = [
+  {id:"know", left:"I know exactly what I would hand to AI", right:"I have no idea what I would hand to AI"},
+  {id:"changed", left:"AI has already changed my daily work", right:"AI has not touched my daily work"},
+];
+const SPEED = ["much slower, it cost me time","about the same","10 to 25 percent faster","25 to 50 percent faster","more than 50 percent faster"];
+const ROLE = ["product / strategy","design / UX / research","engineering / data","lead across more than one"];
+const FREQ = ["daily, part of how I work","a few times a week","occasionally, still experimenting","rarely or never"];
+
+const answers = {triads:{}, dyads:{}};
+
+// ---- triads -----------------------------------------------------------------
+// Vertices: A top, B bottom-left, C bottom-right. We store barycentric weights
+// (a,b,c) that sum to 1, so the data reads directly as "how much each corner".
+const W=320,H=292, A=[160,26], B=[30,236], C=[290,236];
+function bary(px,py){
+  const d=(B[1]-C[1])*(A[0]-C[0])+(C[0]-B[0])*(A[1]-C[1]);
+  let a=((B[1]-C[1])*(px-C[0])+(C[0]-B[0])*(py-C[1]))/d;
+  let b=((C[1]-A[1])*(px-C[0])+(A[0]-C[0])*(py-C[1]))/d;
+  let c=1-a-b; return [a,b,c];
+}
+function inside(bc){return bc.every(w=>w>=-0.001);}
+const triadBox=document.getElementById("triads");
+TRIADS.forEach(t=>{
+  const card=document.createElement("div"); card.className="card";
+  const wrap=(txt,x,y,anchor)=>{
+    const words=txt.split(" "); const lines=[]; let cur="";
+    words.forEach(w=>{ if((cur+" "+w).trim().length>16){lines.push(cur.trim());cur=w;} else cur+=" "+w;});
+    if(cur.trim())lines.push(cur.trim());
+    return `<text class="corner" x="${x}" y="${y}" text-anchor="${anchor}">`+
+      lines.map((l,i)=>`<tspan x="${x}" dy="${i?12:0}">${l}</tspan>`).join("")+`</text>`;
+  };
+  card.innerHTML=`<div class="q">${t.q}</div>
+    <div class="triad">
+      <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+        <polygon class="tri-shape" points="${A} ${B} ${C}"/>
+        ${wrap(t.corners[0], A[0], A[1]-9, "middle")}
+        ${wrap(t.corners[1], 6, B[1]+18, "start")}
+        ${wrap(t.corners[2], W-6, B[1]+18, "end")}
+        <circle r="7" fill="var(--dot)" style="display:none"/>
+      </svg>
+      <div class="placed" id="placed-${t.id}"></div>
+    </div>`;
+  triadBox.appendChild(card);
+  const svg=card.querySelector("svg"), dot=card.querySelector("circle"), note=card.querySelector(".placed");
+  function place(ev){
+    const r=svg.getBoundingClientRect();
+    const pt=(ev.touches?ev.touches[0]:ev);
+    const px=(pt.clientX-r.left)*(W/r.width), py=(pt.clientY-r.top)*(H/r.height);
+    const bc=bary(px,py); if(!inside(bc))return;
+    dot.setAttribute("cx",px); dot.setAttribute("cy",py); dot.style.display="";
+    answers.triads[t.id]=bc.map(w=>Math.round(w*100));
+    note.textContent="placed";
+    check();
+  }
+  svg.addEventListener("click",place);
+  svg.addEventListener("touchstart",e=>{e.preventDefault();place(e);},{passive:false});
+});
+
+// ---- dyads ------------------------------------------------------------------
+const dyadBox=document.getElementById("dyads");
+DYADS.forEach(d=>{
+  const card=document.createElement("div"); card.className="card";
+  card.innerHTML=`<div class="dyad-ends"><span>${d.left}</span><span>${d.right}</span></div>
+    <input type="range" min="0" max="100" value="50" id="dy-${d.id}">`;
+  dyadBox.appendChild(card);
+  const r=card.querySelector("input"); answers.dyads[d.id]=50;
+  r.addEventListener("input",()=>answers.dyads[d.id]=+r.value);
+});
+
+// ---- simple option lists ----------------------------------------------------
+function radios(host,name,arr,cb){
+  arr.forEach((o,i)=>{const l=document.createElement("label");
+    l.innerHTML=`<input type="radio" name="${name}" value="${i}">${o}`;
+    l.querySelector("input").addEventListener("change",()=>{cb(o);check();});
+    host.appendChild(l);});
+}
+radios(document.getElementById("speed"),"speed",SPEED,v=>answers.speed=v);
+radios(document.getElementById("role"),"role",ROLE,v=>answers.role=v);
+radios(document.getElementById("freq"),"freq",FREQ,v=>answers.freq=v);
+const confBox=document.getElementById("conf");
+[1,2,3,4,5].forEach(n=>{const l=document.createElement("label");
+  l.innerHTML=`<input type="radio" name="conf" value="${n}"><span>${n}</span>`;
+  // conf is required, so this handler must call check() like radios() does for the
+  // shared lists. Without it the Send button never reacts to answering confidence.
+  l.querySelector("input").addEventListener("change",()=>{answers.conf=n;check();});
+  confBox.appendChild(l);});
+
+// ---- validate + submit ------------------------------------------------------
+const btn=document.getElementById("submit"), status=document.getElementById("status");
+function check(){
+  const name=document.getElementById("name").value.trim();
+  const story=document.getElementById("story").value.trim();
+  const allTriads=TRIADS.every(t=>answers.triads[t.id]);
+  const ok = name.length>1 && story.length>3 && allTriads && answers.speed && answers.conf && answers.freq;
+  btn.disabled=!ok;
+  // Ordered as the page is, so the message names the first thing still missing.
+  status.textContent = ok ? "Ready to send." :
+    (!name?"Add your name to send." : !story?"Add your moment to send." : !allTriads?"Place all five triangles to send." :
+     !answers.speed?"Choose the speed estimate to send." :
+     !answers.conf?"Choose how confident you are to send." :
+     "Choose how often you use AI to send.");
+  return ok;
+}
+document.getElementById("name").addEventListener("input",check);
+document.getElementById("story").addEventListener("input",check);
+btn.addEventListener("click",async ()=>{
+  if(!check())return;
+  answers.story=document.getElementById("story").value.trim();
+  answers.name=document.getElementById("name").value.trim();
+  answers.sources=document.getElementById("sources").value.trim();
+  answers.ts=new Date().toISOString();
+  btn.disabled=true; status.textContent="Sending...";
+  try{
+    await db.collection(COLLECTION).add(answers);
+    document.getElementById("form").style.display="none";
+    document.getElementById("bar").style.display="none";
+    document.getElementById("thanks").style.display="";
+    window.scrollTo(0,0);
+  }catch(e){
+    console.error(e);
+    status.textContent="Could not send. Try again, or tell Sami.";
+    btn.disabled=false;
+  }
+});
+</script>
+</body>
+</html>
